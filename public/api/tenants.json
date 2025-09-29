@@ -1,0 +1,96 @@
+{
+  "updatedAt": "2025-09-29T12:00:00Z",
+  "bbcloud": {
+    "name": "BBCloud",
+    "currentSUs": 6,
+    "suDefinition": { "nginx": 12, "pnode": 12, "dnode": 12, "spark": 6, "ruleengine": 2 },
+    "nodeInventory": { "nginx": 72, "pnode": 72, "dnode": 72, "spark": 36, "ruleengine": 12 },
+    "pods": { "total": 1240, "running": 1180, "pending": 40, "failed": 3, "succeeded": 17 }
+  },
+  "tenants": [
+    {
+      "id": "armada",
+      "name": "Armada",
+      "endpoints": 200000,
+      "cnappAccounts": 45,
+      "clusters": ["cluster6","cluster7"],
+      "metrics": {
+        "vcpuTotal": 5200,
+        "vcpuUsedPctPeak": 0.62,
+        "ramGiBTotal": 18500,
+        "ramUsedPctPeak": 0.68,
+        "kafkaLagMessages": 1200000,
+        "injectMsgsPerSec": 5200,
+        "drainMsgsPerSec": 4800,
+        "kafkaDiskUsedPct": 0.58,
+        "pnodeCpuPct": 0.61,
+        "dnodeCpuPct": 0.57,
+        "sparkInjectPerSec": 30200,
+        "sparkDrainPerSec": 22800
+      }
+    },
+    {
+      "id": "systems",
+      "name": "Systems",
+      "endpoints": 56000,
+      "cnappAccounts": 33,
+      "clusters": ["cluster3","cluster6"],
+      "metrics": {
+        "vcpuTotal": 4100,
+        "vcpuUsedPctPeak": 0.59,
+        "ramGiBTotal": 15200,
+        "ramUsedPctPeak": 0.63,
+        "kafkaLagMessages": 880000,
+        "injectMsgsPerSec": 4300,
+        "drainMsgsPerSec": 4200,
+        "kafkaDiskUsedPct": 0.64,
+        "pnodeCpuPct": 0.58,
+        "dnodeCpuPct": 0.55,
+        "sparkInjectPerSec": 27600,
+        "sparkDrainPerSec": 24500
+      }
+    },
+    {
+      "id": "think",
+      "name": "Think",
+      "endpoints": 43000,
+      "cnappAccounts": 21,
+      "clusters": ["cluster2","cluster7"],
+      "metrics": {
+        "vcpuTotal": 3200,
+        "vcpuUsedPctPeak": 0.67,
+        "ramGiBTotal": 12100,
+        "ramUsedPctPeak": 0.69,
+        "kafkaLagMessages": 1600000,
+        "injectMsgsPerSec": 3900,
+        "drainMsgsPerSec": 3200,
+        "kafkaDiskUsedPct": 0.71,
+        "pnodeCpuPct": 0.72,
+        "dnodeCpuPct": 0.63,
+        "sparkInjectPerSec": 24100,
+        "sparkDrainPerSec": 19800
+      }
+    },
+    {
+      "id": "voyager",
+      "name": "Voyager",
+      "endpoints": 0,
+      "cnappAccounts": 220000,
+      "clusters": ["cluster1"],
+      "metrics": {
+        "vcpuTotal": 1600,
+        "vcpuUsedPctPeak": 0.48,
+        "ramGiBTotal": 6100,
+        "ramUsedPctPeak": 0.52,
+        "kafkaLagMessages": 220000,
+        "injectMsgsPerSec": 1500,
+        "drainMsgsPerSec": 1600,
+        "kafkaDiskUsedPct": 0.42,
+        "pnodeCpuPct": 0.49,
+        "dnodeCpuPct": 0.44,
+        "sparkInjectPerSec": 9800,
+        "sparkDrainPerSec": 10400
+      }
+    }
+  ]
+}

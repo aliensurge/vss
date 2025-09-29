@@ -1,0 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: dark; }
+body { background: #0b0c0e; color: #fff; font-family: "IBM Plex Sans", ui-sans-serif, system-ui; }
