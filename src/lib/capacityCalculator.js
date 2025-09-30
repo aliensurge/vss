@@ -1,16 +1,16 @@
 export const VCPU_PER_1000 = 42.35;
-export const RAM_PER_1000  = 144.22;
+export const RAM_PER_1000  = 144.22;     // GiB
 export const ENDPOINTS_PER_SU = 5000;
 
-export function calcHeadroom({ vcpuTotal, vcpuUsedPctPeak, ramGiBTotal, ramUsedPctPeak, bufferPct = 0.30 }) {
-  const vcpuAvail = vcpuTotal * (1 - vcpuUsedPctPeak) * (1 - bufferPct);
-  const ramAvail  = ramGiBTotal * (1 - ramUsedPctPeak) * (1 - bufferPct);
+export function calcHeadroom({ vcpuTotal = 0, vcpuUsedPctPeak = 0, ramGiBTotal = 0, ramUsedPctPeak = 0, bufferPct = 0.30 }) {
+  const vcpuAvail = Math.max(0, vcpuTotal * (1 - vcpuUsedPctPeak) * (1 - bufferPct));
+  const ramAvail  = Math.max(0, ramGiBTotal * (1 - ramUsedPctPeak) * (1 - bufferPct));
   const headroomCpu = (vcpuAvail / VCPU_PER_1000) * 1000;
   const headroomRam = (ramAvail  / RAM_PER_1000)  * 1000;
   return { vcpuAvail, ramAvail, headroomCpu, headroomRam, safeHeadroom: Math.floor(Math.min(headroomCpu, headroomRam)) };
 }
 
-export function resourcesForEndpoints(endpoints) {
+export function resourcesForEndpoints(endpoints = 0) {
   const units = endpoints / 1000;
   return {
     addVcpu: Math.ceil(units * VCPU_PER_1000),
@@ -19,29 +19,12 @@ export function resourcesForEndpoints(endpoints) {
   };
 }
 
-export function lagMinutes(lagMessages, drainPerSec) {
+export function lagMinutes(lagMessages = 0, drainPerSec = 1) {
   const d = Math.max(1, drainPerSec || 0);
   return (lagMessages / d) / 60;
 }
 
-
-export function suNeededForEndpoints(endpoints, perSu = ENDPOINTS_PER_SU) {
-  return Math.ceil((endpoints || 0) / perSu);
-}
-
-export function nodePlanForSUs(susToAdd, suDef) {
-  const mult = Math.max(0, susToAdd || 0);
-  const d = suDef || {};
-  return {
-    nginx: (d.nginx || 0) * mult,
-    pnode: (d.pnode || 0) * mult,
-    dnode: (d.dnode || 0) * mult,
-    spark: (d.spark || 0) * mult,
-    ruleengine: (d.ruleengine || 0) * mult
-  };
-}
-
-export function totalsFromTenants(tenants) {
+export function totalsFromTenants(tenants = []) {
   const sums = tenants.reduce((acc, t) => {
     const m = t.metrics || {};
     acc.vcpuTotal += m.vcpuTotal || 0;
@@ -71,4 +54,27 @@ export function overallHeadroomFromTenants(tenants, bufferPct = 0.30) {
     }),
     totals: t
   };
+}
+
+export function suNeededForEndpoints(endpoints, perSu = ENDPOINTS_PER_SU) {
+  return Math.ceil((endpoints || 0) / perSu);
+}
+
+export function nodePlanForSUs(susToAdd, suDef = {}) {
+  const mult = Math.max(0, susToAdd || 0);
+  return {
+    nginx: (suDef.nginx || 0) * mult,
+    pnode: (suDef.pnode || 0) * mult,
+    dnode: (suDef.dnode || 0) * mult,
+    spark: (suDef.spark || 0) * mult,
+    ruleengine: (suDef.ruleengine || 0) * mult
+  };
+}
+
+export function abbr(n = 0) {
+  const abs = Math.abs(n);
+  if (abs >= 1e9) return (n/1e9).toFixed(1).replace(/\.0$/,"") + "B";
+  if (abs >= 1e6) return (n/1e6).toFixed(1).replace(/\.0$/,"") + "M";
+  if (abs >= 1e3) return (n/1e3).toFixed(1).replace(/\.0$/,"") + "k";
+  return String(n);
 }

@@ -1,0 +1,5 @@
+{
+  "updatedAt": "2025-09-30T12:00:00Z",
+  "sos": { "name": "SOS Scanner", "lastHeartbeat": "2025-09-30T11:56:00Z" },
+  "soc": { "name": "SOC SIEM",    "lastHeartbeat": "2025-09-30T11:53:30Z" }
+}
