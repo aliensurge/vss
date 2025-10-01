@@ -100,11 +100,12 @@ When **heartbeat > 15m**, a 🤖 button appears. Clicking it opens a drawer that
 ### Possible features within AI Troubleshooter "agent" ###
 
 - Ranks **likely causes** (token expired, DNS/egress, endpoint down…)
-- Lists **checks** (copy-to-clipboard kubectl/curl commands)
+- Lists **checks** (copy to clipboard kubectl/curl commands)
 - Offers **actions** (restart rollout, rotate secrets, open portal links)
 - Lets you jot **notes** and auto-generates a **draft incident summary**
 
 <img width="1722" height="966" alt="image" src="https://github.com/user-attachments/assets/2e294e06-d6a0-4969-bfb4-7b4d0e3b097b" />
+
 
 <img width="1728" height="960" alt="image" src="https://github.com/user-attachments/assets/a3698192-e97d-432a-ba86-38b7bbfa5283" />
 
